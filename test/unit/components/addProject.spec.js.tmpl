@@ -1,0 +1,27 @@
+import { renderComponent, expect, sinon, assert } from '../test_helper';
+import react from 'react';
+import AddProject from '../../../src/app/components/Common/addProject';
+const state = {
+    "user": {
+        "profile": {
+            "emailAddress": "test@runner.com"
+        }
+    }
+
+};
+const props = {
+    apiProgress: () => sinon.spy()
+};
+
+describe('AddProject Component', () => {
+    let wrapper = null;
+    beforeEach(() => {
+        wrapper = renderComponent(AddProject, props, state);
+    });
+    it('should render correctly', () => {
+        expect(wrapper).to.exist;
+    });
+    it('should have visible add icon', () => {
+        expect(wrapper.find(".add-project-icon")).to.exist;
+    });
+});

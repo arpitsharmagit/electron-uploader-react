@@ -1,0 +1,12 @@
+html,
+body{
+    background: #EEEEEE;
+    user-select: none;
+    font-family: 'Roboto';
+}
+body,span, a {
+    cursor: default !important;
+}
+.mainContainer{
+    height: 679px;	width: 680px;	border: 1px solid #E0E0E0;	background-color: #FFFFFF;
+}

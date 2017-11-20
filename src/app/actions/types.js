@@ -1,0 +1,32 @@
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const USER_PROFILE = "USER_PROFILE";
+export const USER_LOGOUT = "USER_LOGOUT";
+export const PROJECT_SELECTION = "PROJECT_SELECTION";
+export const FILEROOM_ID = "FILEROOM_ID";
+export const FOLDER_ID = "FOLDER_ID";
+export const PORJECT_CHANGE = "PORJECT_CHANGE";
+export const FILEROOM_ERROR = "FILEROOM_ERROR";
+export const FILEROOM_ERROR_ON = "FILEROOM_ERROR_ON";
+export const FILEROOM_ERROR_OFF = "FILEROOM_ERROR_OFF";
+export const LOADING_DONE = "LOADING_DONE";
+export const LOADING = "LOADING";
+export const SHOW_API_LOADER = "SHOW_API_LOADER";
+export const USER_DETAILS_ERROR = "USER_DETAILS_ERROR";
+// upload actions
+export const CREATE_METADATA = "CREATE_METADATA";
+export const UPLOAD_CONTENT = "UPLOAD_CONTENT";
+export const UPDATE_PROGRESS = "UPDATE_PROGRESS";
+export const UPLOAD_START = "UPLOAD_START";
+export const RETRY_FAILED = "RETRY_FAILED";
+export const CANCEL_UPLOAD = "CANCEL_UPLOAD";
+export const UPLOAD_COMPLETE = "UPLOAD_COMPLETE";
+export const UPLOAD_FAILED = "UPLOAD_FAILED";
+export const SERVER_ERROR = "SERVER_ERROR";
+export const FILTER_LIST = "FILTER_LIST";
+export const NETWORK_STATUS = "NETWORK_STATUS";
+export const CLEAR_LIST = "CLEAR_LIST";
+export const SHOW_NOTIFICATION = "SHOW_NOTIFICATION";
+export const NOTIFICATION_COMPLETE = "NOTIFICATION_COMPLETE";
+// Drop location switch
+export const DROP_LOCATION = "DROP_LOCATION";

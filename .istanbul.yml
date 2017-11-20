@@ -1,0 +1,17 @@
+verbose: true
+instrumentation:
+    root: .
+    excludes: [ 'src/public','/src/public/js']
+    embed-source: false
+    preserve-comments: false
+    complete-copy: false
+    save-baseline: false
+reporting:
+    print: summary
+    reports:
+        - lcov
+        - lcovonly
+    dir: ./coverage
+hooks:
+    hook-run-in-context: false
+    post-require-hook: null

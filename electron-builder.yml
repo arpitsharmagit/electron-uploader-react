@@ -1,0 +1,55 @@
+appId: com.desktop.uploader
+compression: maximum
+npmRebuild: true
+asar: true
+
+electronVersion: 1.6.11
+
+
+copyright: Arpit Sharma
+productName: Desktop Uploader
+artifactName: "${productName}-${os}-${arch}-${version}.${ext}"
+files:  
+  - "!**/{.git,.gitignore,.gitattributes,.editorconfig,.flowconfig,npm-debug.log,.nyc_output,.vscode}"
+  - "!coverage${/*}"
+  - "!test${/*}"
+  - "!build${/*}"
+  - "!src/app${/*}"
+
+directories:
+  output: build
+  buildResources: resources
+
+forceCodeSigning: true
+
+publish:
+  provider: github
+
+win:
+  target:
+    target: nsis
+    arch:
+      - x64
+      - ia32
+  icon: src/assets/images/uploadericon.ico
+  publisherName: "Arpit Sharma" # this matches the p12 cert CN
+
+mac:
+  target:
+    #- dmg
+  category: public.app-category.tools
+
+linux:
+  target:
+    #- deb
+    #- AppImage
+
+nsis:
+  deleteAppDataOnUninstall: true
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  oneClick: false
+  installerSidebar : resources/installerSidebar.bmp
+  license: resources/license.txt
+
+

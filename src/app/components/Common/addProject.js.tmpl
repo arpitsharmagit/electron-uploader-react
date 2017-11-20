@@ -1,0 +1,126 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { network } from "../../actions";
+import { Modal, Button, FormGroup, Col, ControlLabel, Form, FormControl } from 'react-bootstrap';
+import helper from '../../helpers';
+class AddProject extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { showModal: false, projectName: "", projectDescription: "" };
+        this.close = this.close.bind(this);
+        this.handleProjectNameChange = this.handleProjectNameChange.bind(this);
+        this.handleProjectDeschange = this.handleProjectDeschange.bind(this);
+        this.addProject = this.addProject.bind(this);
+    }
+    handleProjectDeschange(event) {
+        this.setState({ projectDescription: event.target.value });
+    }
+    addProject() {
+        this.props.apiProgress(true);
+        var projectCreateData = {
+            "info": {
+                "dataCenter": "dataCenter",
+                "demo": true,
+                "description": this.state.projectDescription,
+                "emailId": this.props.user.profile.emailAddress,
+                "externalId": this.state.projectName,
+                "name": this.state.projectName,
+                "productCode": "javelin",
+                "scheduledActivationDate": 0,
+                "state": "ACTIVE"
+            }
+        };
+        helper.apiHelper.createProject(projectCreateData).then((response) => {
+            this.props.apiProgress(false);
+            if (response.status === 201) {
+                return { success: true };
+            }
+            return response.json();
+        }).then((responseJSON) => {
+            if (responseJSON.success) {
+                this.setState(
+                    {
+                        errorMessage: ""
+                    });
+            } else {
+                responseJSON = responseJSON || {};
+                throw { error_description: responseJSON.error_description };
+            }
+        }).catch((e) => {
+            this.props.apiProgress(false);
+            this.setState(
+                {
+                    errorMessage: e.error_description || "Unable to create project !"
+                });
+        });
+    }
+    handleProjectNameChange(event) {
+        this.setState({ projectName: event.target.value, errorMessage: '' });
+    }
+    close() {
+        this.setState({ showModal: false });
+        this.reset();
+    }
+
+    open() {
+        this.setState({ showModal: true });
+    }
+    reset() {
+        this.setState({ projectName: '', projectDescription: '', errorMessage: '' });
+    }
+    render() {
+        return (
+            <div className="add-project">
+                <i onClick={() => { this.open(); } } className="fa fa-plus-circle add-project-icon"></i>
+                <Modal dialogClassName="add-project-modal" show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add New Project</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <form className="form-horizontal" onSubmit={(e) => { e.preventDefault(); return false; } }>
+                            <FormGroup controlId="formHorizontalName">
+                                <Col componentClass={ControlLabel} xs={2} sm={2}>
+                                    Project Name
+                                </Col>
+                                <Col xs={10} sm={10}>
+                                    <FormControl onChange={this.handleProjectNameChange}
+                                        value={this.state.projectName} type="text" placeholder="Project Name" />
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup controlId="formHorizontalDesc">
+                                <Col componentClass={ControlLabel} xs={2} sm={2}>
+                                    Description
+                                </Col>
+                                <Col xs={10} sm={10}>
+                                    <FormControl type="textarea"
+                                        onChange={this.handleProjectDeschange}
+                                        value={this.state.projectDescription} placeholder="Project Description" />
+                                </Col>
+                            </FormGroup>
+                            <p className="add-project-error">{this.state.errorMessage}</p>
+                        </form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button
+                            onClick={this.addProject}
+                            disabled={!this.state.projectName || !this.state.projectDescription} type="button" bsStyle="primary">
+                            Add
+                                    </Button>
+                        <Button onClick={this.close}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>);
+    }
+}
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        apiProgress: (callInProgress) => dispatch(network.changeAPICallingStatus(callInProgress))
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddProject);

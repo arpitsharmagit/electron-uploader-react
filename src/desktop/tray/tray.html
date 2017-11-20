@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Desktop Uploader</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="tray.css" />
+</head>
+
+<body>
+    <div class="layout">
+        <div class="top-layer-stroke">
+            <div style="height: 60px;z-index: 10;position: absolute;">
+            <p class="header" id="docsummary">0 Documents uploaded</p>
+            <span class="summary" id="percentage">--</span>
+            <span class="summary-copy">/
+                <span id="openweb"> View in DataSite 
+                </span>
+            </span>
+        </div>
+        <div class="progress-div" id="progressdiv"></div>
+        </div>
+        <div class="button-primary-default-tray">
+            <span class="button-primary-default-text" id="openapp">Open in Uploader App</span>
+        </div>
+    </div>
+    <script>
+        let trayScript = require('./script/tray');
+        trayScript.updateUIStatus();
+    </script>
+</body>
+
+</html>
